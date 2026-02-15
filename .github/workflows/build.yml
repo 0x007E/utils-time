@@ -1,0 +1,57 @@
+name: Build Pipeline
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+env:
+  OUTPUT_FOLDER: "./output"
+  
+jobs:
+  pack-library:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository for deployment
+        uses: actions/checkout@v5
+
+      - name: Checkout shared-format repository
+        uses: actions/checkout@v5
+        with:
+          repository: 0x007E/shared-format
+          path: shared-format
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout shared-return repository
+        uses: actions/checkout@v5
+        with:
+          repository: 0x007E/shared-return
+          path: shared-return
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare library package
+        run: |
+          mkdir -p ./${{ env.OUTPUT_FOLDER }}/shared/format
+          cp -r ./shared-format/time.h ./${{ env.OUTPUT_FOLDER }}/shared/format/
+
+          mkdir -p ./${{ env.OUTPUT_FOLDER }}/shared/return
+          cp -r ./shared-return/status.h ./${{ env.OUTPUT_FOLDER }}/shared/return/
+
+          mkdir -p ./${{ env.OUTPUT_FOLDER }}/utils/time
+          cp ./compare.c ./${{ env.OUTPUT_FOLDER }}/utils/time/
+          cp ./compare.h ./${{ env.OUTPUT_FOLDER }}/utils/time/
+ 
+      - name: Pack files for upload
+        run: |
+          tar -czvf build.tar.gz ${{ env.OUTPUT_FOLDER }}
+          zip -r build.zip ${{ env.OUTPUT_FOLDER }}
+
+      - name: Upload library package
+        uses: actions/upload-artifact@v4
+        with:
+            name: library-package
+            path: ${{ env.OUTPUT_FOLDER }}
+            retention-days: 1
