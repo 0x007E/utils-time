@@ -17,7 +17,7 @@
  * @see https://github.com/0x007e/utils-time "Time Utilities GitHub Repository"
  */
 
-#include "compare.h"
+#include "validate.h"
 
 /**
  * @brief Validates a FORMAT_Time instance for proper hour, minute, and second ranges.
@@ -34,7 +34,7 @@
  * @details
  * This function performs a simple range validation on the provided @p time structure. If hour, minute, or second exceed their respective limits, the function reports an invalid status; otherwise, it reports a valid time.
  */
-RETURN_Data_Status time_validate_time(const FORMAT_Time *time)
+RETURN_Data_Status validate_time(const FORMAT_Time *time)
 {
     if((time->hour > 23) || (time->minute > 59) || (time->second > 59))
     {
@@ -58,7 +58,7 @@ RETURN_Data_Status time_validate_time(const FORMAT_Time *time)
  * @details
  * This function performs a simple, range-based validation on the provided @p date structure. It checks only the maximum values for day, month, and year, and does not account for month-specific day counts or leap years. For stricter calendar validation, additional checks must be applied by the caller or a higher-level routine.
  */
-RETURN_Data_Status time_validate_date(const FORMAT_Date *date)
+RETURN_Data_Status validate_date(const FORMAT_Date *date)
 {
     if((date->day > 31) || (date->month > 12) || (date->year > 99))
     {
@@ -70,21 +70,21 @@ RETURN_Data_Status time_validate_date(const FORMAT_Date *date)
 /**
  * @brief Validates a FORMAT_DateTime instance by checking its date and time components.
  *
- * @param datetime Pointer to a ::FORMAT_DateTime structure whose @p date and @p time substructures will be validated using time_validate_date() and time_validate_time().
+ * @param datetime Pointer to a ::FORMAT_DateTime structure whose @p date and @p time substructures will be validated using validate_date() and validate_time().
  *
  * @return Returns a combined status code:
  * - `RETURN_Valid` if both the date and time components are valid.
  * - `RETURN_Invalid` if either the date or the time (or both) are invalid.
  *
  * @details
- * This function delegates validation to time_validate_time() for the time portion and time_validate_date() for the date portion of @p datetime. The individual results are bitwise OR-combined into a single RETURN_Data_Status value, allowing callers to treat any invalid subcomponent as an overall invalid date-time.
+ * This function delegates validation to validate_time() for the time portion and validate_date() for the date portion of @p datetime. The individual results are bitwise OR-combined into a single RETURN_Data_Status value, allowing callers to treat any invalid subcomponent as an overall invalid date-time.
  */
-RETURN_Data_Status time_validate_datetime(const FORMAT_DateTime *datetime)
+RETURN_Data_Status validate_datetime(const FORMAT_DateTime *datetime)
 {
     RETURN_Data_Status status = RETURN_Valid;
 
-    status |= time_validate_time(&datetime->time);
-    status |= time_validate_date(&datetime->date);
+    status |= validate_time(&datetime->time);
+    status |= validate_date(&datetime->date);
 
     return status;
 }

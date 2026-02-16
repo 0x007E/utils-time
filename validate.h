@@ -24,8 +24,8 @@
     #include "../../shared/format/time.h"
     #include "../../shared/return/status.h"
 
-    RETURN_Data_Status time_validate_time(const FORMAT_Time *time);
-    RETURN_Data_Status time_validate_date(const FORMAT_Date *date);
-    RETURN_Data_Status time_validate_datetime(const FORMAT_DateTime *datetime);
+    RETURN_Data_Status validate_time(const FORMAT_Time *time);
+    RETURN_Data_Status validate_date(const FORMAT_Date *date);
+    RETURN_Data_Status validate_datetime(const FORMAT_DateTime *datetime);
     
 #endif /* COMPARE_H_ */
