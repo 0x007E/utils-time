@@ -13,8 +13,8 @@ This utility can be used to validate a `time`/`date`/`datetime`.
 ```
 utils/
 └── time/
-    ├── compare.c
-    └── compare.h
+    ├── validate.c
+    └── validate.h
 
 shared/
 ├── format/
@@ -58,7 +58,7 @@ git submodule add https://github.com/0x007E/utils-time.git    ./utils/time
 ## Programming
 
 ```c
-#include "../lib/utils/time/compare.h"
+#include "../lib/utils/time/validate.h"
 
 int main(void)
 {
@@ -81,17 +81,17 @@ int main(void)
     datetime.date.year = 26;
 
 
-    if(time_validate_time(time) != RETURN_Valid)
+    if(validate_time(time) != RETURN_Valid)
     {
         // Error Handling
     }
 
-    if(time_validate_date(date) != RETURN_Valid)
+    if(validate_date(date) != RETURN_Valid)
     {
         // Error Handling
     }
 
-    if(time_validate_datetime(datetime) != RETURN_Valid)
+    if(validate_datetime(datetime) != RETURN_Valid)
     {
         // Error Handling
     }
