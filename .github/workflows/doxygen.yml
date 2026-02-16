@@ -49,8 +49,8 @@ jobs:
           cp -r ./shared-return/status.h ./structure/shared/return/
 
           mkdir -p ./structure/utils/time
-          cp ./compare.c ./structure/utils/time/
-          cp ./compare.h ./structure/utils/time/
+          cp ./validate.c ./structure/utils/time/
+          cp ./validate.h ./structure/utils/time/
 
       - name: Setup Pages
         id: pages

@@ -41,8 +41,8 @@ jobs:
           cp -r ./shared-return/status.h ./${{ env.OUTPUT_FOLDER }}/shared/return/
 
           mkdir -p ./${{ env.OUTPUT_FOLDER }}/utils/time
-          cp ./compare.c ./${{ env.OUTPUT_FOLDER }}/utils/time/
-          cp ./compare.h ./${{ env.OUTPUT_FOLDER }}/utils/time/
+          cp ./validate.c ./${{ env.OUTPUT_FOLDER }}/utils/time/
+          cp ./validate.h ./${{ env.OUTPUT_FOLDER }}/utils/time/
  
       - name: Pack files for upload
         run: |
