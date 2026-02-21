@@ -8,7 +8,7 @@ This utility can be used to validate a `time`/`date`/`datetime`.
 
 ## File Structure
 
-![File Structure](https://0x007e.github.io/utils-time/compare_8c__incl.png)
+![File Structure](https://0x007e.github.io/utils-time/validate_8c__incl.png)
 
 ```
 utils/
