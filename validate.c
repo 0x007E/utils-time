@@ -14,7 +14,7 @@
  *
  * @note This file is part of the time utilities module and subject to the license specified in the repository. For updates and the complete revision history, see the GitHub repository.
  *
- * @see https://github.com/0x007e/utils-time "Time Utilities GitHub Repository"
+ * @see https://github.com/0x007e/utils-time "Time Utility GitHub Repository"
  */
 
 #include "validate.h"
